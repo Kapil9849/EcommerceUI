@@ -4,6 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import 'bootstrap/dist/css/bootstrap.min.css';  // CSS for Bootstrap
+import 'bootstrap/dist/js/bootstrap.bundle.min';  // JS for Bootstrap, includes Popper.js
+// import 'bootstrap-icons/font/bootstrap-icons.css';
+
+import 'primereact/resources/themes/lara-light-indigo/theme.css'; // Theme
+import 'primereact/resources/primereact.min.css'; // Core styles
+import 'primeicons/primeicons.css'; // Icons
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

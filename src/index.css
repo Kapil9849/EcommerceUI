@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.p-button{
+  width: 100%;
+  border-radius: 30px !important;
+}
+
+.p-inputtext{
+  width: 100% !important;
+}
