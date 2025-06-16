@@ -1,4 +1,6 @@
 import axios from "axios";
+import api from "./Api";
+import { UserModel } from "../Entities/UserModel";
 const baseUrl = "https://localhost:44308/api/User";
 
 const UserService = {
@@ -8,9 +10,15 @@ const UserService = {
             password
         })
     },
+
     GetUserById(userid:number)
     {
-        return axios.get(baseUrl+"/"+userid)
+        return api.get("User/"+userid)
+    },
+
+    GetAllUsers():Promise<UserModel[]>
+    {
+        return api.get<UserModel[]>("User").then(res=>res.data);
     }
 }
 

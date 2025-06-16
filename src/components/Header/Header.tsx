@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Header.css';
 
 export default function Header() 
 {
@@ -21,11 +22,11 @@ export default function Header()
         console.log("Logout clicked")
         localStorage.clear();
         // setLoginUser(null);
-        setUserLoggedIn(false);
+        setUserLoggedIn(false); 
         navigate("/");
     }
     return (
-        <header className="App-header">
+        <header className="App-header HeaderComp">
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="/"><b className='LogoSize'>Kapil Store</b></a>
@@ -41,7 +42,7 @@ export default function Header()
                                 <a className="nav-link active" href="/login">Login</a>
                             </li>}
                             {userLoggedIn && <li className="nav-item">
-                                <a className="nav-link active" onClick={Logout}>Logout</a>
+                                <a className="nav-link active logout" onClick={Logout}>Logout</a>
                             </li>}
                         </ul>
                     </div>

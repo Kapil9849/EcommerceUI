@@ -68,7 +68,14 @@ export default function Login() {
                         Role: userData.role
                     }
                     localStorage.setItem("user",JSON.stringify(data));
-                navigate("/user");
+                if(data.Role==="Admin")
+                {
+                    navigate("/admin");
+                }
+                else if(data.Role==="User")
+                {
+                    navigate("/user");
+                }
                 window.location.reload();
                 })
             })
