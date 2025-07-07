@@ -24,6 +24,11 @@ const UserService = {
     UpdateUser(User:any)
     {
         return api.put("User",User).then(res=>res.data)
+    },
+
+    DeleteUser(userID:number)
+    {
+        return api.delete("User?userId="+userID).then(res=>res.data);
     }
 }
 

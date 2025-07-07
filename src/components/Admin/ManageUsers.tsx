@@ -5,12 +5,16 @@ import { UserModel } from "../../Entities/UserModel"
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import EditUser from "../User/EditUser";
-        
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+
 
 export default function ManageUsers() {
     const [Users, setUsers] = useState<any>({})
-    const [User,setEditUser]=useState<any>({})
+    const [User, setEditUser] = useState<any>({})
     const [dialogVisible, setDialogVisible] = useState(false);
+    const [delDialogVisible, setDelDialogVisible] = useState(false);
+    const [delUser, setdelUser]=useState<any>({});
 
     // const []
 
@@ -20,20 +24,34 @@ export default function ManageUsers() {
         })
     }, [])
 
-    const GetallUser=()=>{
+    const GetallUser = () => {
         UserService.GetAllUsers().then((response: UserModel[]) => {
             setUsers(response);
         })
     }
 
-    const handleDialog=()=>{
+    const handleDialog = () => {
         setDialogVisible(false);
     }
 
-    const EditUserDialog=(User:any)=>{
+    const EditUserDialog = (User: any) => {
         setEditUser(User);
         setDialogVisible(true);
     }
+
+    const DeleteUser = () => {
+        UserService.DeleteUser(delUser.userId).then((response: any) => {
+            if (response.status) {
+                console.log("User Deleted Successfully");
+                setDelDialogVisible(false);
+                GetallUser();
+            }
+        })
+            .catch((error) => {
+                console.log("Failed to delete the User", error);
+            })
+    }
+
     return (
         <div className="container ManageUsers">
             <div className="row ">
@@ -45,16 +63,17 @@ export default function ManageUsers() {
                         <Column field="email" header="Email"></Column>
                         <Column field="phone" header="Phone"></Column>
                         <Column field="role" header="Role"></Column>
-                        <Column body={(rowData)=>(
+                        <Column body={(rowData) => (
                             <div className="row">
                                 <div className="col">
-                                    <i className=" cursor pi pi-user-edit" onClick={()=>EditUserDialog(rowData)}></i>
+                                    <i className=" cursor pi pi-user-edit" onClick={() => EditUserDialog(rowData)}></i>
                                 </div>
                                 <div className="col">
-                                    <i className="cursor pi pi-trash" style={{ color: "red" }}></i>
+                                    <i className="cursor pi pi-trash" style={{ color: "red" }}
+                                        onClick={() => {setDelDialogVisible(true);setdelUser(rowData)}}></i>
                                 </div>
                             </div>
-                            )} header="Action"></Column>
+                        )} header="Action"></Column>
 
                     </DataTable>
                 </div>
@@ -65,9 +84,23 @@ export default function ManageUsers() {
                     visible: dialogVisible,
                     onHide: handleDialog,
                     update: GetallUser
-                }}/>
+                }} />
+            </div>
+            <div className="deldialog">
+                <Dialog header="Warning" visible={delDialogVisible} style={{ width: '25vw' }} onHide={() => { if (!delDialogVisible) return; setDelDialogVisible(false); }}>
+                    <div className="row mt-2">
+                        <p className="text-center">Do you want to delete the User?</p>
+                    </div>
+                    <div className="row mt-4">
+                        <div className="col">
+                            <Button label="Cancel" onClick={()=>{setDelDialogVisible(false)}}/>
+                        </div>
+                        <div className="col">
+                            <Button label="Delete" onClick={()=>DeleteUser()}/>
+                        </div>
+                    </div>
+                </Dialog>
             </div>
         </div>
-
     )
 }
