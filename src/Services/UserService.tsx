@@ -19,6 +19,11 @@ const UserService = {
     GetAllUsers():Promise<UserModel[]>
     {
         return api.get<UserModel[]>("User").then(res=>res.data);
+    },
+
+    UpdateUser(User:any)
+    {
+        return api.put("User",User).then(res=>res.data)
     }
 }
 

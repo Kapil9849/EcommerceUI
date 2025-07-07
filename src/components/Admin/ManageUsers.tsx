@@ -4,17 +4,36 @@ import { UserModel } from "../../Entities/UserModel"
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-
+import EditUser from "../User/EditUser";
+        
 
 export default function ManageUsers() {
     const [Users, setUsers] = useState<any>({})
+    const [User,setEditUser]=useState<any>({})
+    const [dialogVisible, setDialogVisible] = useState(false);
+
+    // const []
 
     useEffect(() => {
         UserService.GetAllUsers().then((response: UserModel[]) => {
-            console.log(response);
             setUsers(response);
         })
     }, [])
+
+    const GetallUser=()=>{
+        UserService.GetAllUsers().then((response: UserModel[]) => {
+            setUsers(response);
+        })
+    }
+
+    const handleDialog=()=>{
+        setDialogVisible(false);
+    }
+
+    const EditUserDialog=(User:any)=>{
+        setEditUser(User);
+        setDialogVisible(true);
+    }
     return (
         <div className="container ManageUsers">
             <div className="row ">
@@ -26,20 +45,29 @@ export default function ManageUsers() {
                         <Column field="email" header="Email"></Column>
                         <Column field="phone" header="Phone"></Column>
                         <Column field="role" header="Role"></Column>
-                        <Column body={
+                        <Column body={(rowData)=>(
                             <div className="row">
                                 <div className="col">
-                                    <i className="pi pi-user-edit"></i>
+                                    <i className=" cursor pi pi-user-edit" onClick={()=>EditUserDialog(rowData)}></i>
                                 </div>
                                 <div className="col">
-                                    <i className="pi pi-trash" style={{color:"red"}}></i>
+                                    <i className="cursor pi pi-trash" style={{ color: "red" }}></i>
                                 </div>
                             </div>
-                        } header="Action"></Column>
+                            )} header="Action"></Column>
 
                     </DataTable>
                 </div>
             </div>
+            <div className="Edit">
+                <EditUser DialogProps={{
+                    userData: User,
+                    visible: dialogVisible,
+                    onHide: handleDialog,
+                    update: GetallUser
+                }}/>
+            </div>
         </div>
+
     )
 }

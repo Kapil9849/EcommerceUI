@@ -20,3 +20,7 @@ code {
 .p-inputtext{
   width: 100% !important;
 }
+
+.cursor{
+  cursor: pointer;
+}
