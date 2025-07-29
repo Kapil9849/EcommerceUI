@@ -7,6 +7,7 @@ import Login from './components/Login';
 import UserLanding from './components/User/UserLanding';
 import Admin from './components/Admin/Admin';
 import ManageUsers from './components/Admin/ManageUsers';
+import ManageProducts from './components/Admin/ManageProducts';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
           <Route path="/admin" element={<Admin />}>
             <Route path="users" element={<ManageUsers />} />
+            <Route path="products" element={<ManageProducts />} />
           </Route>
 
           <Route path="/user" element={<UserLanding />} />

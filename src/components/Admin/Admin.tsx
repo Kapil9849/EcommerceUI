@@ -18,7 +18,7 @@ export default function Admin() {
                     <Button label='View Users' onClick={()=>{navigate("/admin/users")}}></Button>
                 </div>
                 <div className="col-md-3">
-                    <Button label='View Products'></Button>
+                    <Button label='View Products' onClick={()=>{navigate("/admin/products")}}></Button>
 
                 </div>
                 <div className="col-md-3">
