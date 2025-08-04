@@ -31,11 +31,6 @@ const UserService = {
     {
         return api.delete("User?userId="+userID).then(res=>res.data);
     },
-
-    GetAllProducts():Promise<ProductModel[]>
-    {
-        return api.get<ProductModel[]>("Product").then(res=>res.data);
-    }
 }
 
 export default UserService;

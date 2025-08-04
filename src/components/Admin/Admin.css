@@ -12,3 +12,9 @@
         background-color: #212529 !important;
     }
 }
+
+.underline{
+    text-decoration:underline;
+    color: blue;
+    cursor: pointer;
+}

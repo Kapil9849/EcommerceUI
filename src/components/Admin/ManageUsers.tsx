@@ -54,6 +54,11 @@ export default function ManageUsers() {
 
     return (
         <div className="container ManageUsers">
+            <div className="row">
+                <div className="col">
+                    <h4>Users</h4>
+                </div>
+            </div>
             <div className="row ">
                 <div className="col">
                     <DataTable value={Users} tableStyle={{ minWidth: '50rem' }}>
